@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CalculadoraComponent {
   numero1: number = 0;
-  numero2: number = 0
+  numero2: number = 0;
   resultado: number = 0;
 
   somaNumeros() {
