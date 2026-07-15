@@ -1,8 +1,8 @@
 <div class="container-pai">
     <div class="container">
         <h1>Tabela de compras</h1>
-        <form class="adicionar-item-formulario">
-            <input type="text" id="botao-adicionar" placeholder="Adicione um item">
+        <form class="adicionar-item-formulario" #frm="ngForm" (ngSubmit)="adicionarItem()">
+            <input type="text" id="botao-adicionar" placeholder="Adicione um item" name="item" [(ngModel)]="item">
             <button type="submit">Adicionar</button>
         </form>
 
