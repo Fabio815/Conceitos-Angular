@@ -19,13 +19,21 @@
                     <tr>
                         <td>{{ elemento.id }}</td>
                         <td>{{ elemento.nome }}</td>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" /></td>
                     </tr>
                 } @empty {
                     <tr id="lista-vazia" colapse="3">
                         Lista vazia
                     </tr>
                 }
+
+                <!--
+                <tr *ngFor="let elemento of itens">
+                    <td>{{ elemento.id }}</td>
+                    <td>{{ elemento.nome }}</td>
+                    <td><input type="checkbox" /></td>
+                </tr>
+                -->
             </tbody>
         </table>
     </div>
