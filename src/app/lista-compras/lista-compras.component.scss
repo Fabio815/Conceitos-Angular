@@ -86,3 +86,18 @@ input[type ="checkbox"] {
 .item-riscado {
     text-decoration: line-through;
 }
+
+.limpar {
+    border: none;
+    background-color: rgb(142, 39, 35);
+    border-radius: 4px;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.limpar:hover {
+    background-color: rgb(119, 26, 23);
+}

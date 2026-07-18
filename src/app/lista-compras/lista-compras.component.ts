@@ -28,4 +28,8 @@ export class ListaComprasComponent {
   riscarItem(riscado: Item) {
     riscado.comprado = !riscado.comprado;//Sempre vai receber o inverso dele.
   }
+
+  limpar() {
+    this.itens = [];
+  }
 }

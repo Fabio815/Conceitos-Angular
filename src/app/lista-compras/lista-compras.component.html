@@ -4,6 +4,8 @@
         <form class="adicionar-item-formulario" #frm="ngForm" (ngSubmit)="adicionarItem()">
             <input type="text" id="botao-adicionar" placeholder="Adicione um item" name="item" [(ngModel)]="item">
             <button type="submit">Adicionar</button>
+
+            <button class="limpar" type="button" (click)="limpar()">Limpar</button>
         </form>
 
         <table>
