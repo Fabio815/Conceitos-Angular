@@ -24,4 +24,8 @@ export class ListaComprasComponent {
 
     this.item = '';
   }
+
+  riscarItem(riscado: Item) {
+    riscado.comprado = !riscado.comprado;//Sempre vai receber o inverso dele.
+  }
 }
