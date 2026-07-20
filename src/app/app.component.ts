@@ -4,11 +4,11 @@ import { RouterOutlet } from '@angular/router';
 import { MinhapaginaComponent } from './minhapagina/minhapagina.component'*/
 //import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { ListaComprasComponent } from './lista-compras/lista-compras.component'
-import {MatButtonModule} from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatButtonModule],
+  imports: [RouterOutlet, MatToolbarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
