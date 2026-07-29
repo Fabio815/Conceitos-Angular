@@ -11,14 +11,24 @@ export class ClienteService {
 
   salvar(cliente: Cliente) {
     const storage = this.obterLocalStorage();
-    debugger;
+    //debugger;
     storage.push(cliente);
 
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
-  obterLocalStorage() : Cliente[] {
+  pesquisarCliente(nomeBusca: string): Cliente[] {
     debugger;
+    const clientes: Cliente[] = this.obterLocalStorage();
+    if (!nomeBusca) {
+      return clientes;
+    }
+
+    return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);//O indexOf retorna -1 quando não o valor.
+  }
+
+  private obterLocalStorage() : Cliente[] {
+    //debugger;
     const repositorioCliente = localStorage.getItem(ClienteService.REPO_CLIENTES);
     if (repositorioCliente) {
       const clientes: Cliente[] = JSON.parse(repositorioCliente);
