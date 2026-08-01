@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Cliente } from '../cadastro/cliente';
 import { ClienteService } from '../cliente.service';
 import { _VisuallyHiddenLoader } from "@angular/cdk/private";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,12 +28,12 @@ import { _VisuallyHiddenLoader } from "@angular/cdk/private";
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
 })
-export class ConsultaComponent implements OnInit{
+export class ConsultaComponent implements OnInit {
   nomeBusca: string = '';
   listaClientes: Cliente[] = [];
-  colunasTabela: string[] = ["id", "nome", "cpf", "dataNascimento", "email"];//Preciso criar isso para conseguir mostrar a tabela.
+  colunasTabela: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "editar"];//Preciso criar isso para conseguir mostrar a tabela.
 
-  constructor(private service: ClienteService) {
+  constructor(private service: ClienteService, private router: Router) {
 
   }
 
@@ -42,5 +43,9 @@ export class ConsultaComponent implements OnInit{
 
   ngOnInit() {
     this.listaClientes = this.service.pesquisarCliente('');
+  }
+
+  preparaEditar(id: string) {
+    this.router.navigate(['/cadastro'], { queryParams: {'id': id} });
   }
 }

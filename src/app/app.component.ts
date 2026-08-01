@@ -3,7 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 /*import { olaMundoComponent } from './olamundo/olamundo.component';
 import { MinhapaginaComponent } from './minhapagina/minhapagina.component'*/
 //import { CalculadoraComponent } from './calculadora/calculadora.component';
-import { ListaComprasComponent } from './lista-compras/lista-compras.component'
+//import { ListaComprasComponent } from './lista-compras/lista-compras.component'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
 
