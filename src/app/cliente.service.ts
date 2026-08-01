@@ -27,6 +27,11 @@ export class ClienteService {
     return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);//O indexOf retorna -1 quando não o valor.
   }
 
+  carregarClientePorId(id: string): Cliente | undefined {
+    const valores = this.obterLocalStorage();
+    return valores.find(cliente => cliente.id == id);
+  }
+
   private obterLocalStorage() : Cliente[] {
     //debugger;
     const repositorioCliente = localStorage.getItem(ClienteService.REPO_CLIENTES);

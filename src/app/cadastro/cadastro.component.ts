@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service'
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -22,14 +23,35 @@ import { ClienteService } from '../cliente.service'
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit {
   cliente: Cliente = Cliente.novoCliente();
+  atualizando: boolean = false;
 
-  constructor(private service: ClienteService) { 
+  constructor(private service: ClienteService, private route: ActivatedRoute) { 
 
   }
 
   mostrarCliente() {
     this.service.salvar(this.cliente);
+    this.cliente = Cliente.novoCliente();
+  }
+
+  ngOnInit(): void {
+    //Pegando o parametro que estou passando na url.
+    this.route.queryParamMap.subscribe( (query: any) => {
+      /*const params = query.params;
+      const id = params.id;
+      console.log(id);*/
+      const params = query['params']; //usando o ['params'] e o ['id'], digo que pode conter o valor
+      const id = params['id'];
+      if (id) {
+        let clienteEncontrado = this.service.carregarClientePorId(id);
+
+        if (clienteEncontrado) {
+          this.atualizando = true;
+          this.cliente = clienteEncontrado;
+        }
+      }
+    })
   }
 }
