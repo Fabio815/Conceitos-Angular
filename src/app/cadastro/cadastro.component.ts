@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service'
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +18,7 @@ import { ActivatedRoute, Route } from '@angular/router';
             FormsModule, 
             MatInputModule,
             MatIconModule,
-            MatButtonModule
+            MatButtonModule,
           ],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
@@ -27,13 +27,22 @@ export class CadastroComponent implements OnInit {
   cliente: Cliente = Cliente.novoCliente();
   atualizando: boolean = false;
 
-  constructor(private service: ClienteService, private route: ActivatedRoute) { 
+  constructor(
+    private service: ClienteService, 
+    private route: ActivatedRoute,
+    private router: Router
+  ) { 
 
   }
 
-  mostrarCliente() {
-    this.service.salvar(this.cliente);
-    this.cliente = Cliente.novoCliente();
+  salvar() {
+    if (!this.atualizando) {
+      this.service.salvar(this.cliente);
+      this.cliente = Cliente.novoCliente();
+    } else {
+      this.service.atualizar(this.cliente);
+      this.router.navigate(['/consulta']);//direcionando para o consulta após atuarlizar.
+    }
   }
 
   ngOnInit(): void {
