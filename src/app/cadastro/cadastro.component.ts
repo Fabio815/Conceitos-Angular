@@ -11,6 +11,10 @@ import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { BrasilAPIService } from '../brasil-api.service';
+import { Estado, Municipio } from '../brasilapi.models';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro',
@@ -21,7 +25,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
             MatInputModule,
             MatIconModule,
             MatButtonModule,
-            NgxMaskDirective
+            NgxMaskDirective,
+            MatSelectModule,
+            CommonModule
           ], providers: [
             provideNgxMask()
           ],
@@ -32,11 +38,14 @@ export class CadastroComponent implements OnInit {
   cliente: Cliente = Cliente.novoCliente();
   atualizando: boolean = false;
   snack: MatSnackBar = inject(MatSnackBar);
+  estado: Estado[] = [];
+  municipio: Municipio[] = [];
 
   constructor(
     private service: ClienteService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private brasilAPIservice: BrasilAPIService
   ) { 
 
   }
@@ -73,6 +82,15 @@ export class CadastroComponent implements OnInit {
           this.cliente = clienteEncontrado;
         }
       }
+      this.carregarUFs();
     })
+  }
+
+  carregarUFs() {
+    //é observable, quando tem alguma mudança ele notifica o subscrib. Usamos porque é assincrona.
+    this.brasilAPIservice.listarUFs().subscribe({
+      next: listaEstados => this.estado = listaEstados,//Caso dê bom
+      error: erro => console.log(erro)//Caso dê ruim
+    });
   }
 }
