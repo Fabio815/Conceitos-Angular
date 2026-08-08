@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Cliente } from '../cadastro/cliente';
 import { ClienteService } from '../cliente.service';
 import { _VisuallyHiddenLoader } from "@angular/cdk/private";
@@ -32,6 +33,7 @@ export class ConsultaComponent implements OnInit {
   nomeBusca: string = '';
   listaClientes: Cliente[] = [];
   colunasTabela: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "editar"];//Preciso criar isso para conseguir mostrar a tabela.
+  snack: MatSnackBar = Inject(MatSnackBar);
 
   constructor(private service: ClienteService, private router: Router) {
 
@@ -56,5 +58,10 @@ export class ConsultaComponent implements OnInit {
   deletar(cliente: Cliente) {
     this.service.deletar(cliente);
     this.ngOnInit();
+    this.mostrarMensagem("Cliente deletado com sucesso");
+  }
+
+  mostrarMensagem(mensagem: string) {
+    this.snack.open(mensagem, "Ok");
   }
 }
