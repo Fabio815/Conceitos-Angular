@@ -52,9 +52,21 @@
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
-                                <mat-select>
+                                <mat-select [(value)]="cliente.uf" (selectionChange)="carregarMunicipios($event)">
                                     @for (elemento of estado; track elemento.sigla) {
                                         <mat-option [value]="elemento.sigla">{{ elemento.sigla }} - {{ elemento.nome }}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-select [(value)]="cliente.municipio">
+                                    @for (elemento of municipio; track elemento.nome) {
+                                        <mat-option [value]="elemento.nome">{{ elemento.nome }}</mat-option>
                                     }
                                 </mat-select>
                             </mat-form-field>

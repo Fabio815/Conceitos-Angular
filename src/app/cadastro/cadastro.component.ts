@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { BrasilAPIService } from '../brasil-api.service';
 import { Estado, Municipio } from '../brasilapi.models';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -84,6 +84,15 @@ export class CadastroComponent implements OnInit {
       }
       this.carregarUFs();
     })
+  }
+
+  //Toda vez que eu selecionar vai disparar o evento(mudança no select)
+  carregarMunicipios(event: MatSelectChange) {
+    const ufSelecionada = event.value;
+    this.brasilAPIservice.listarMunicipios(ufSelecionada).subscribe({
+      next: listaMunicipios => this.municipio = listaMunicipios,
+      error: erro => console.log(erro)
+    });
   }
 
   carregarUFs() {
