@@ -76,10 +76,13 @@ export class CadastroComponent implements OnInit {
       const id = params['id'];
       if (id) {
         let clienteEncontrado = this.service.carregarClientePorId(id);
-
         if (clienteEncontrado) {
           this.atualizando = true;
           this.cliente = clienteEncontrado;
+          if (this.cliente.uf) {
+            const evento = {value: this.cliente.uf}
+            this.carregarMunicipios(evento as MatSelectChange);
+          }
         }
       }
       this.carregarUFs();
